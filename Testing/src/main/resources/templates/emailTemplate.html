@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Email Template</title>
+    <style>
+        /* Define styles for your email template */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .message {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: Orange;
+        }
+
+        .address {
+            text-align: left;
+            color: Orange;
+            /* Align the address to the left */
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1> Greetings</h1>
+    </div>
+
+    <div class="message">
+        <p th:text="${message}" class="greeting-text">"Dear Employee,Congratulations on reaching another milestone with sagarsoft !As you celebrate your 5th work anniversary, we want to express our heartfelt appreciation for your dedication, hard work, and contributions to our success. Your commitment and loyalty are truly commendable. Here's to many more years of shared achievements and growth together
+            "
+            .</p>
+        <p>Celebrating Special Moments!</p> <!-- Removed the 'blink' class -->
+    </div>
+
+    <!-- Inline image -->
+<br/>
+    <div class="footer">
+        <img src="https://www.equitybulls.com/equitybullsadmin/uploads/Sagarsoft%20India%20Limited%202.jpg" width="100px" height="70px"/>
+        <p>Thanks and Regards,</p>
+        <p style="font-weight: bold">Sagarsoft Team</p>
+        <p>+91 4067191000 | <a href="mailto:hrd@sagarsoft.in">hrd@sagarsoft.in</a></p>
+        <p style="color: orange;" class="address">SagarSoft (India) Limited | Plot No-111, 1st floor</p>
+        <!-- Added the 'address' class -->
+        <p>Road No-10 | Jubilee Hills | Hyderabad</p>
+        <p><a href="https://www.sagarsoft.in/">www.sagarsoft.in</a></p>
+    </div>
+</div>
+</body>
+</html>

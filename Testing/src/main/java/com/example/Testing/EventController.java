@@ -47,11 +47,11 @@ public class EventController {
                 LocalDate eventDateTime = LocalDate.parse(eventDateTimeString, formatter);
                 List<String> emailAddresses = List.of(event.getEmailAddresses());
 
-                if (eventDateTime.isEqual(currentDateTime)) {
-                    EmailDetails details = new EmailDetails(emailAddresses, message, eventName);
-                    String result = email.sendSimpleMail(details);
-                    System.out.println(result); // Print the result of sending the email
-                }
+//                if (eventDateTime.isEqual(currentDateTime)) {
+//                    EmailDetails details = new EmailDetails(emailAddresses, message, eventName,n);
+//                    String result = email.sendSimpleMail(details);
+//                    System.out.println(result); // Print the result of sending the email
+//                }
             }
             return ResponseEntity.ok("Events stored successfully!");
         } catch (Exception e) {

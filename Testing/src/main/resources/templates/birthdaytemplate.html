@@ -100,12 +100,10 @@
     </div>
 
     <div class="image-container">
-<!--        https://imgtr.ee/images/2024/03/21/0dbc033a1bd354bb0141be42edb0681a.png-->
-        <img class="w" th:src="'data:image/png;base64,'+${image}" src="" height="100%" width="auto"  alt="Birthday Greetings"/>
 
-        <h2 class="over sniglet-regular sniglet-extrabold" >Abhiram Kumar Danala</h2>
+        <img src="cid:imageId" class="w" alt="Birthday Greetings"/>
     </div>
-<!--    !#strings.startsWith(#httpServletRequest.requestURI, '/') ? 'display-none' : ''-->
+    <!--    !#strings.startsWith(#httpServletRequest.requestURI, '/') ? 'display-none' : ''-->
     <div class="message outfit">
         <p th:text="${message}" class="greeting-text">
             May your special day be filled with joy, laughter, and unforgettable

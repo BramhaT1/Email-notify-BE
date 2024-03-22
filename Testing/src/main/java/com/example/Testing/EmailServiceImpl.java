@@ -4,7 +4,10 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +15,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-//import org.thymeleaf.engine.TemplateModel;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
+
 @RestController
 public class EmailServiceImpl implements EmailService {
-
-
-    private TemplateModel templateModel;
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -33,57 +34,64 @@ public class EmailServiceImpl implements EmailService {
     @Value("${spring.mail.username}")
     private String sender;
 
+
     @GetMapping("Sendmail")
     public String sendSimpleMail(@RequestBody EmailDetails details) {
         try {
+            BufferedImage image = ImageIO.read(new File("src/main/resources/templates/anni2.jpg"));
+            Font font = new Font("Sans-serif", Font.BOLD, 65);
+            String text = details.getName();
+            Graphics g = image.getGraphics();
+            FontMetrics metrics = g.getFontMetrics(font);
+            int positionX = 55;//(image.getWidth() - metrics.stringWidth(text)) / 2;
+            System.out.println(image.getWidth()+" "+image.getHeight());
+            int positionY = 575;//(image.getHeight() - metrics.getHeight()) / 2 + metrics.getAscent();
+            g.setFont(font);
+            g.setColor(Color.RED);
+            g.drawString(text, positionX, positionY);
+            g.dispose();
+            if (ImageIO.write(image, "png", new File("./output_image.png")))
+            {
+                System.out.println("-- saved");
+            }
+
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setFrom(sender);
-
             // Set multiple recipients
             for (String recipient : details.getRecipient()) {
                 mimeMessageHelper.addTo(recipient);
             }
 
             mimeMessageHelper.setSubject(details.getSubject());
+//                mimeMessageHelper.setSubject(details.getSubject());
 
-            // Create template model
-            TemplateModel templateModel = new TemplateModel();
-            templateModel.setMessage(details.getMsgBody());
 
-            // Convert image to base64
-            String imageData = convertImageToBase64("src/main/resources/Images/bir.png");
-
-            templateModel.setImage(imageData);
-
-            // Set template model in Thymeleaf context
+            // Process template
             Context context = new Context();
-            context.setVariable("templateModel", templateModel);
+            context.setVariable("message", details.getMsgBody());
 
-            String emailContent = templateEngine.process("birthdaytemplate", context);
+            String emailContent = templateEngine.process("birthdaytemplate.html", context);
 
             mimeMessageHelper.setText(emailContent, true);
+            ClassPathResource resource=new ClassPathResource("static\\output_image.png");
+            mimeMessageHelper.addInline("imageId",resource);
             javaMailSender.send(mimeMessage);
             return "Mail Sent Successfully...";
         } catch (MessagingException e) {
             e.printStackTrace(); // Handle exception appropriately
             return "Error while Sending Mail";
-        }
-    }
-
-    public String convertImageToBase64(String imagePath) {
-        try {
-            Path path = Paths.get(imagePath);
-            byte[] imageData = Files.readAllBytes(path);
-            return Base64.getEncoder().encodeToString(imageData);
         } catch (IOException e) {
-            e.printStackTrace(); // Handle exception appropriately
-            return null;
+            throw new RuntimeException(e);
         }
-
     }
+
+    //
+//    public void addInlineImage(MimeMessageHelper mimeMessageHelper) throws MessagingException {
+//        FileSystemResource image = new FileSystemResource("C:\\Users\\user\\Downloads\\Testing\\Testing\\src\\main\\resources\\Images\\bir.png");
+//        mimeMessageHelper.addInline("logo", image);
+//    }
+
+
+
 }
-
-// Define TemplateModel class
-
-

@@ -17,6 +17,7 @@ public class EmailDetails {
     private List<String> recipient;
     private String msgBody;
     private String subject;
+    private String name;
 
 
 }

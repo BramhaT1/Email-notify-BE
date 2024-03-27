@@ -4,11 +4,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-            href="https://fonts.googleapis.com/css2?family=Outfit&family=Sometype+Mono&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Sometype+Mono&display=swap"
             rel="stylesheet"
     />
+
     <meta charset="UTF-8" />
     <title>Email Template</title>
+
     <style>
         /* Define styles for your email template */
         body {
@@ -18,9 +20,13 @@
           background-color: #f5f5f5;
         }
         .image-container {
-          position: relative;
-          /* text-align: center; */
-          /* color: white; */
+          /* position: relative; */
+          text-align: center;
+          color: white;
+          background-size: cover;
+          height: 400%;
+          width: 100%;
+          background-image: url("https://imgtr.ee/images/2024/03/22/573c36ebf8318914206339aba0041b21.jpeg");
         }
         .container {
           max-width: 600px;
@@ -42,44 +48,77 @@
           border-top-right-radius: 10px;
         }
 
+        .message {
+          font-size: 18px;
+          margin-bottom: 20px;
+          color: #333;
+          text-align: center;
+        }
 
         .footer {
           margin-top: 20px;
           font-size: 14px;
           color: rgb(15, 15, 15);
           font-weight: bold;
-                      }
+        }
 
         .address {
           text-align: left;
-          color: rgb(218, 154, 71);
+          color: Orange;
           /* Align the address to the left */
         }
 
         .w {
           width: 100%;
+          line-height: 0%;
+          z-index: 1;
         }
         .over {
           position: absolute;
-          top: 41.5%;
-          left: 2.3%;
-          color: #b84139;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
-        .outfit {
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
+        .sniglet-regular {
+          font-family: "Sniglet", system-ui;
+          font-weight: 400;
+          font-style: normal;
+          color: #333;
         }
 
-  .nu{
-    font-family: "Outfit", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    position: absolute;
-     top: 15%;
-    left: 18%;
-    color: #278136;}
+        .sniglet-extrabold {
+          font-family: "Sniglet", system-ui;
+          font-weight: 500;
+          font-style: normal;
+        }
+        td{
+        height: 350px;
+        }
+
+
+
+        /* Media queries */
+        @media only screen and (max-width: 600px) {
+            .header h1 {
+                font-size: 15px;
+            }
+
+
+            .footer img {
+                width: 80px;
+                height: auto;
+            }
+
+            table h1{
+                font-size: 13px;
+            }
+            td{
+             height: 180px;}
+
+
+        }
+
+
     </style>
 </head>
 <body>
@@ -88,11 +127,26 @@
         <h1 class="w">It's your milestone moment with us!</h1>
     </div>
 
-    <div class="image-container">
-        <img class="w" src="./anni2.jpg" height="100%" width="auto" />
-        <h1 text="${num}" class="nu">7<sup>th</sup></h1>
-        <h1 text="${name}" class="over outfit">Abhira</h1>
-    </div>
+    <table style="width: 100%;" >
+        <tr>
+            <td style="background-image: url(https://imgtr.ee/images/2024/03/26/90cc426fa7c802e04f7a86ca1f582cfa.jpeg);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            ">
+                <h1 ></h1>
+                <h1 class="sniglet-regular sniglet-extrabold" style="margin-top: -16.5.5%;
+                margin-left: 2%;color: #328879;">Happy  <span th:text="${count}" style="color:#fc9d03"></span><sup style="color:#fc9d03 " th:text="${eeth}"></sup>
+                </h1>
+                <h1 class="sniglet-regular sniglet-extrabold" style="margin-top: -13.5.5%;
+                margin-left: 2%;color: #328879;">Work Anniversary</h1>
+                <h1 th:text="${fullname}" class="sniglet-regular sniglet-extrabold" style="margin-top: 0%;
+                margin-left: 2%;color:#073482;">Chandra Shekar Mora</h1>
+            </td>
+        </tr>
+    </table>
+    <!--    !#strings.startsWith(#httpServletRequest.requestURI, '/') ? 'display-none' : ''-->
+
 
     <!-- Inline image -->
     <br />
@@ -103,7 +157,9 @@
                 height="70px"
         />
         <p>Thanks & Regards,</p>
-        <p style="font-weight: bold; color:rgb(22, 129, 190)">Team Human Resources, Sagarsoft</p>
+        <p style="font-weight: bold; color: rgb(22, 129, 190)">
+            Team Human Resources, Sagarsoft
+        </p>
         <p>
             +91 4067191000 |
             <a href="mailto:hrd@sagarsoft.in">hrd@sagarsoft.in</a>
@@ -118,4 +174,3 @@
 </div>
 </body>
 </html>
-

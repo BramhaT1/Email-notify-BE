@@ -1,23 +1,15 @@
 package com.example.Testing;
 
-
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
-
+import java.util.Date;
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class EmailDetails {
-
-
-    private List<String> recipient;
-    private String msgBody;
-    private String subject;
+public class UseraDTO {
     private String firstname;
     private String lastname;
+    private String emailaddress;
     private int anniversaryYear;
-
 }

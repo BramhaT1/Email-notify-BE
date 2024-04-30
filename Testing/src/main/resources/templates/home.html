@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Anniversary Mailer | Sagarsoft HR</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container-fluid {
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        .jumbotron {
+            background-color: #007bff;
+            color: white;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #004085;
+            border-color: #004085;
+        }
+
+        .btn-primary:hover {
+            background-color: #003564;
+            border-color: #003564;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1>Welcome to Anniversary Mailer</h1>
+        <p class="lead">Your tool for managing anniversary greetings at Sagarsoft HR</p>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="@{/update-schedule}" th:object="${scheduleForm}" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="timePicker" placeholder="Select Time" required>
+                    <input type="hidden" id="cronExpression" name="cronExpression" th:field="*{cronExpression}">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Schedule</button>
+            </form>
+            <div class="form-group mt-3">
+                <form th:action="@{/pause}" method="post">
+                    <button type="submit" class="btn btn-secondary">Pause</button>
+                </form>
+                <form th:action="@{/resume}" method="post">
+                    <button type="submit" class="btn btn-secondary ml-2">Resume</button>
+                </form>
+            </div>
+            <p th:text="${message}"></p> <!-- Display success message -->
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#timePicker').datepicker({
+            format: 'hh:ii',
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#timePicker').on('changeDate', function () {
+            var selectedTime = $('#timePicker').val();
+            var cronExpression = convertToCron(selectedTime);
+            $('#cronExpression').val(cronExpression);
+        });
+
+        function convertToCron(time) {
+            var parts = time.split(':');
+            var hours = parts[0];
+            var minutes = parts[1];
+
+            var cronExpression = minutes + ' ' + hours + ' * * *';
+
+            return cronExpression;
+        }
+    });
+</script>
+</body>
+</html>

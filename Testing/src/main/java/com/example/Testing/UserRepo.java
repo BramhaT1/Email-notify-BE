@@ -1,39 +1,22 @@
 package com.example.Testing;
-import com.example.Testing.UserDTO;
-import org.apache.xmlbeans.impl.xb.xmlconfig.Extensionconfig;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface UserRepo extends JpaRepository<User,Long> {
 
-//    @Query("SELECT u FROM User u WHERE DAY(u.dob) = DAY(:currentDate) AND MONTH(u.dob) = MONTH(:currentDate) AND u.isactive = true")
-//    List<User> findActiveEmployeesWithBirthdayToday(@Param("currentDate") Date currentDate);
+    @Query("SELECT u.userFullName AS fullName, u.email AS email FROM User u WHERE MONTH(u.dob) = MONTH(:date) AND DAY(u.dob) = DAY(:date) AND u.isActive = true")
+    List<Map<String, Object>> findActiveUsersByBirthday(@Param("date") Date date);
 
-//        @Query(value="SELECT CONCAT(u.firstname, ' ', u.lastname) FROM main_users u WHERE DAY(u.dob) = DAY(:currentDate) AND MONTH(u.dob) = MONTH(:currentDate) AND u.isactive = true",nativeQuery = true)
-//    List<String> findActiveEmployeesNamesWithBirthdayToday(@Param("currentDate") Date currentDate);
+    @Query("SELECT u.userFullName AS fullname, u.email AS email, YEAR(:date) - YEAR(e.dateOfJoining) AS anniversaryYear " +
+            "FROM Employee e " +
+            "JOIN User u ON e.user_id = u.id " +
+            "WHERE MONTH(e.dateOfJoining) = MONTH(:date) AND DAY(e.dateOfJoining) = DAY(:date)")
+    List<Map<String, Object>> findEmployeesWithAnniversaryByDate(@Param("date") Date date);
 
-    @Query(value = "SELECT CONCAT(u.firstname, ' ', u.lastname) AS FullName " +
-            "FROM sentrifugo_sagarsoft_live.main_users u " +
-            "WHERE DAY(u.dob) = DAY(:currentDate) " +
-            "AND MONTH(u.dob) = MONTH(:currentDate) " +
-            "AND u.isactive = 1", nativeQuery = true)
-    List<String> findActiveEmployeesNamesWithBirthdayToday(@Param("currentDate") Date currentDate);
 
-    @Query(value = "SELECT u.firstname AS firstname, u.lastname AS lastname, u.emailaddress AS emailaddress, u.dob AS dob " +
-            "FROM sentrifugo_sagarsoft_live.main_users u " +
-            "WHERE DAY(u.dob) = DAY(:currentDate) " +
-            "AND MONTH(u.dob) = MONTH(:currentDate) " +
-            "AND u.isactive = 1", nativeQuery = true)
-    List<UserDTO> findActiveEmployeesWithBirthdayToday(@Param("currentDate") Date currentDate);
-
-    @Query(value = "SELECT u.firstname, u.lastname, YEAR(u.createddate) - YEAR(:givenDate) AS anniversaryYear " +
-            "FROM sentrifugo_sagarsoft_live.main_users u" +
-            "WHERE DAY(createddate) = DAY(:givenDate) " +
-            "AND MONTH(createddate) = MONTH(:givenDate) " +
-            "AND isactive = 1", nativeQuery = true)
-    List<UseraDTO> findActiveUsersByWorkAnniversary(@Param("givenDate") Date currentDate);
 }

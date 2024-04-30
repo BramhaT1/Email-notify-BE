@@ -16,8 +16,10 @@ public class EmailDetails {
     private List<String> recipient;
     private String msgBody;
     private String subject;
-    private String firstname;
-    private String lastname;
-    private int anniversaryYear;
+    private String fullName;
+    private Integer anniversaryYear;
 
+    public void addRecipient(String email) {
+        recipient.add(email);
+    }
 }

@@ -26,7 +26,6 @@
           background-size: cover;
           height: 400%;
           width: 100%;
-          backgroud-image: url("https://imgtr.ee/images/2024/03/22/573c36ebf8318914206339aba0041b21.jpeg");
         }
         .container {
           max-width: 600px;
@@ -43,15 +42,14 @@
           color: #fff;
           text-align: center;
           padding: 10px 0;
-          margin-bottom: 3px;
+          margin-bottom: 20px;
           border-top-left-radius: 10px;
           border-top-right-radius: 10px;
         }
 
         .message {
           font-size: 18px;
-          margin-bottom: 20px;
-          font-weight:450;
+          margin-bottom: 10px;
           color: #333;
           text-align: center;
         }
@@ -80,28 +78,25 @@
           left: 50%;
           transform: translate(-50%, -50%);
         }
-
-
-
-        .outfit {
-          font-family: "Open Sans", sans-serif;
+        .sniglet-regular {
+          font-family: "Sniglet", system-ui;
+          font-weight: 400;
           font-style: normal;
-          font-optical-sizing: auto;
-          font-weight: 600;
-          font-style: normal;
-         }
-
-        .hb{
-        color:#041740;
+          color: #333;
         }
-        .fname,.lname{
-        color:#0b5e73;
+
+        .sniglet-extrabold {
+          font-family: "Sniglet", system-ui;
+          font-weight: 500;
+          font-style: normal;
         }
         td{
         height: 350px;
         }
 
-         /* Media queries */
+
+
+        /* Media queries */
         @media only screen and (max-width: 600px) {
             .header h1 {
                 font-size: 15px;
@@ -113,20 +108,14 @@
                 height: auto;
             }
 
-            table h2{
+            table h1{
                 font-size: 13px;
             }
             td{
-             height: 170px;
-            }
-            outfit{
-            font-weight: 500;
-            }
-            .message{
-            font-size:17px;
-            font-weight:450;
-            }
+             height: 180px;}
+
         }
+
 
     </style>
 </head>
@@ -136,29 +125,38 @@
         <h1 class="w">Birthday Greetings!</h1>
     </div>
 
-    <table style="width: 100%" >
+    <table style="width: 100%;" >
+        <!--        https://imgtr.ee/images/2024/04/01/7618dc843dedf63cbac6714e556bd102.jpeg-->
         <tr>
-            <td style="background-image: url(https://imgtr.ee/images/2024/03/25/8b2c2fa7c39acf926541c96bd43fec6b.png);
-
+            <td style="background-image: url(https://imgtr.ee/images/2024/04/03/abb641eaa8337548ef53419c12b1c1fe.png);
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
+            border-radius:6%;
             ">
-                <h2  class="hb outfit " style="margin-top: 10%;
-                text-align: center;"> Happy Birthday</h2>
-                <h2  th:text="${fname}" class=" outfit  fname" style="margin-top: 0%;
-                text-align: center;">Sai Charan Reddy</h2>
-                <h2  th:text="${lname}" class=" outfit  lname" style="margin-top: -3%;
-                text-align: center;"> Nayanagari </h2>
+                <h1 ></h1>
+                <!--                <h1 class="sniglet-regular sniglet-extrabold" style="margin-top: -16.5.5%;-->
+                <!--                margin-left: 2%;color: #328879;">Happy  <span th:text="${count}" style="color:#fc9d03"></span><sup style="color:#fc9d03 " th:text="${eeth}"></sup>-->
+                <!--                </h1>-->
+                <!--                <h1 class="sniglet-regular sniglet-extrabold" style="margin-top: -13.5.5%;-->
+                <!--                margin-left: 2%;color: #328879;">Work Anniversary</h1>-->
+                <!--                <h1 th:text="${fullname}" class="sniglet-regular sniglet-extrabold" style="margin-top: 0%;-->
+                <!--                margin-left: 2%; color:#fc9d03;">Chandra Shekar Mora</h1>-->
             </td>
-
         </tr>
     </table>
+    <h1 class="sniglet-regular sniglet-extrabold" style="text-align:center;
+                margin-left: 2%;color: #328879;">Happy
+       Birthday
+    </h1>
+    <h1 th:text="${fullname}" class="sniglet-regular sniglet-extrabold" style=" text-align:center;
+     color:#fc9d03;"></h1>
     <!--    !#strings.startsWith(#httpServletRequest.requestURI, '/') ? 'display-none' : ''-->
-    <div class="message outfit">
+
+    <div class="message outfit" style="margin-top:5%">
         <p >
-            May your special day be filled with joy, laughter, and unforgettable
-            moments. Wishing you all the success and happiness in the year ahead!
+            May your special day be filled with joy, laughter, and unforgettable moments.
+            Wishing you all the success and happiness in the year ahead!
         </p>
     </div>
 
@@ -166,20 +164,20 @@
     <br />
     <div class="footer">
         <img
-                src="https://www.equitybulls.com/equitybullsadmin/uploads/Sagarsoft%20India%20Limited%202.jpg"
+                src="https://imgtr.ee/images/2024/04/22/074ab7b7fa2e417ed06fa3adac013588.png"
                 width="100px"
                 height="70px"
         />
         <p>Thanks & Regards,</p>
         <p style="font-weight: bold; color: rgb(22, 129, 190)">
-            Team Human Resources, Sagarsoft
+            Team Human Resources,
         </p>
         <p>
             +91 4067191000 |
             <a href="mailto:hrd@sagarsoft.in">hrd@sagarsoft.in</a>
         </p>
         <p style="color: rgb(221, 52, 9)" class="address">
-            SagarSoft (India) Limited | Plot No-111, 1st floor
+            Sagarsoft (India) Ltd | <span style="color:#196116"> Plot No-111, 1st floor </span>
         </p>
         <!-- Added the 'address' class -->
         <p>Road No-10 | Jubilee Hills | Hyderabad</p>

@@ -52,8 +52,7 @@ public class EmailServiceImpl implements EmailService {
             // Process template
             Context context = new Context();
             context.setVariable("message", details.getMsgBody());
-            context.setVariable("fname",details.getFirstname());
-            context.setVariable("lname",details.getLastname());
+            context.setVariable("fullname",details.getFullName());
             String emailContent = templateEngine.process("birthdaytemplate.html", context);
 
             mimeMessageHelper.setText(emailContent, true);
@@ -84,13 +83,15 @@ public class EmailServiceImpl implements EmailService {
             // Process template
             Context context = new Context();
 //            context.setVariable("message", details.getMsgBody());
-            context.setVariable("fullname",details.getFirstname()+" "+details.getLastname());
+            context.setVariable("fullname",details.getFullName());
             context.setVariable("count",details.getAnniversaryYear());
             String eeth="";
             if(details.getAnniversaryYear()==1)
                 eeth="st";
-            else if (details.getAnniversaryYear()==2)
+            else if (details.getAnniversaryYear()==2 )
                 eeth="nd";
+            else if (details.getAnniversaryYear()==3)
+                eeth="rd";
             else eeth="th";
             context.setVariable("eeth",eeth);
 
